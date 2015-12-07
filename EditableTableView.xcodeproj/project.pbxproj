@@ -1,0 +1,397 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3D57BA2E1C0C8C4700896ADA /* KVIEditableTableView+Editing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57BA2D1C0C8C4700896ADA /* KVIEditableTableView+Editing.m */; };
+		3D57BA341C0CBEBE00896ADA /* KVIEditableColumnPrototypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57BA331C0CBEBE00896ADA /* KVIEditableColumnPrototypeView.m */; };
+		3D57BA371C0CBF1500896ADA /* KVIEditableTablePrototypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57BA361C0CBF1500896ADA /* KVIEditableTablePrototypeView.m */; };
+		3D57BA3A1C0DC41A00896ADA /* KVIEditableColumnPrototypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D57BA391C0DC41A00896ADA /* KVIEditableColumnPrototypeView.xib */; };
+		3D57BA3E1C0DC48000896ADA /* KVICustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57BA3D1C0DC48000896ADA /* KVICustomView.m */; };
+		3D57BA441C0DC50800896ADA /* UIView+AnimatedPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57BA411C0DC50800896ADA /* UIView+AnimatedPresentation.m */; };
+		3D57BA451C0DC50800896ADA /* UIView+IBINSPECTABLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57BA431C0DC50800896ADA /* UIView+IBINSPECTABLE.m */; };
+		3D78116E1C05B8F60063FACD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D78116D1C05B8F60063FACD /* main.m */; };
+		3D7811711C05B8F60063FACD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7811701C05B8F60063FACD /* AppDelegate.m */; };
+		3D7811741C05B8F60063FACD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7811731C05B8F60063FACD /* ViewController.m */; };
+		3D7811771C05B8F60063FACD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D7811751C05B8F60063FACD /* Main.storyboard */; };
+		3D7811791C05B8F60063FACD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D7811781C05B8F60063FACD /* Assets.xcassets */; };
+		3D78117C1C05B8F60063FACD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D78117A1C05B8F60063FACD /* LaunchScreen.storyboard */; };
+		3D7811861C05B9510063FACD /* KVIEditableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7811851C05B9510063FACD /* KVIEditableTableView.m */; };
+		3DFDA2171C064D070062CCD8 /* KVIColumnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFDA2161C064D070062CCD8 /* KVIColumnsCell.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3D57BA2C1C0C8C4700896ADA /* KVIEditableTableView+Editing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KVIEditableTableView+Editing.h"; sourceTree = "<group>"; };
+		3D57BA2D1C0C8C4700896ADA /* KVIEditableTableView+Editing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KVIEditableTableView+Editing.m"; sourceTree = "<group>"; };
+		3D57BA321C0CBEBE00896ADA /* KVIEditableColumnPrototypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVIEditableColumnPrototypeView.h; sourceTree = "<group>"; };
+		3D57BA331C0CBEBE00896ADA /* KVIEditableColumnPrototypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVIEditableColumnPrototypeView.m; sourceTree = "<group>"; };
+		3D57BA351C0CBF1500896ADA /* KVIEditableTablePrototypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVIEditableTablePrototypeView.h; sourceTree = "<group>"; };
+		3D57BA361C0CBF1500896ADA /* KVIEditableTablePrototypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVIEditableTablePrototypeView.m; sourceTree = "<group>"; };
+		3D57BA391C0DC41A00896ADA /* KVIEditableColumnPrototypeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KVIEditableColumnPrototypeView.xib; sourceTree = "<group>"; };
+		3D57BA3C1C0DC48000896ADA /* KVICustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVICustomView.h; sourceTree = "<group>"; };
+		3D57BA3D1C0DC48000896ADA /* KVICustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVICustomView.m; sourceTree = "<group>"; };
+		3D57BA401C0DC50800896ADA /* UIView+AnimatedPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimatedPresentation.h"; sourceTree = "<group>"; };
+		3D57BA411C0DC50800896ADA /* UIView+AnimatedPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimatedPresentation.m"; sourceTree = "<group>"; };
+		3D57BA421C0DC50800896ADA /* UIView+IBINSPECTABLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+IBINSPECTABLE.h"; sourceTree = "<group>"; };
+		3D57BA431C0DC50800896ADA /* UIView+IBINSPECTABLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+IBINSPECTABLE.m"; sourceTree = "<group>"; };
+		3D7811691C05B8F60063FACD /* EditableTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EditableTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D78116D1C05B8F60063FACD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3D78116F1C05B8F60063FACD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3D7811701C05B8F60063FACD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3D7811721C05B8F60063FACD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3D7811731C05B8F60063FACD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3D7811761C05B8F60063FACD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3D7811781C05B8F60063FACD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3D78117B1C05B8F60063FACD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3D78117D1C05B8F60063FACD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D7811841C05B9510063FACD /* KVIEditableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVIEditableTableView.h; sourceTree = "<group>"; };
+		3D7811851C05B9510063FACD /* KVIEditableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVIEditableTableView.m; sourceTree = "<group>"; };
+		3DFDA2151C064D070062CCD8 /* KVIColumnsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVIColumnsCell.h; sourceTree = "<group>"; };
+		3DFDA2161C064D070062CCD8 /* KVIColumnsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVIColumnsCell.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3D7811661C05B8F60063FACD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3D57BA381C0DC3F900896ADA /* KVIEditableColumnPrototypeView */ = {
+			isa = PBXGroup;
+			children = (
+				3D57BA321C0CBEBE00896ADA /* KVIEditableColumnPrototypeView.h */,
+				3D57BA331C0CBEBE00896ADA /* KVIEditableColumnPrototypeView.m */,
+				3D57BA391C0DC41A00896ADA /* KVIEditableColumnPrototypeView.xib */,
+			);
+			name = KVIEditableColumnPrototypeView;
+			sourceTree = "<group>";
+		};
+		3D57BA3B1C0DC48000896ADA /* KVICustomView-master */ = {
+			isa = PBXGroup;
+			children = (
+				3D57BA3C1C0DC48000896ADA /* KVICustomView.h */,
+				3D57BA3D1C0DC48000896ADA /* KVICustomView.m */,
+			);
+			path = "KVICustomView-master";
+			sourceTree = "<group>";
+		};
+		3D57BA3F1C0DC50800896ADA /* KVIViewCategories-master */ = {
+			isa = PBXGroup;
+			children = (
+				3D57BA401C0DC50800896ADA /* UIView+AnimatedPresentation.h */,
+				3D57BA411C0DC50800896ADA /* UIView+AnimatedPresentation.m */,
+				3D57BA421C0DC50800896ADA /* UIView+IBINSPECTABLE.h */,
+				3D57BA431C0DC50800896ADA /* UIView+IBINSPECTABLE.m */,
+			);
+			path = "KVIViewCategories-master";
+			sourceTree = "<group>";
+		};
+		3D7811601C05B8F60063FACD = {
+			isa = PBXGroup;
+			children = (
+				3D78116B1C05B8F60063FACD /* EditableTableView */,
+				3D78116A1C05B8F60063FACD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3D78116A1C05B8F60063FACD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3D7811691C05B8F60063FACD /* EditableTableView.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3D78116B1C05B8F60063FACD /* EditableTableView */ = {
+			isa = PBXGroup;
+			children = (
+				3D57BA3F1C0DC50800896ADA /* KVIViewCategories-master */,
+				3D57BA3B1C0DC48000896ADA /* KVICustomView-master */,
+				3D7811831C05B9240063FACD /* KVIEditableTableVIew */,
+				3D78116F1C05B8F60063FACD /* AppDelegate.h */,
+				3D7811701C05B8F60063FACD /* AppDelegate.m */,
+				3D7811721C05B8F60063FACD /* ViewController.h */,
+				3D7811731C05B8F60063FACD /* ViewController.m */,
+				3D7811751C05B8F60063FACD /* Main.storyboard */,
+				3D7811781C05B8F60063FACD /* Assets.xcassets */,
+				3D78117A1C05B8F60063FACD /* LaunchScreen.storyboard */,
+				3D78117D1C05B8F60063FACD /* Info.plist */,
+				3D78116C1C05B8F60063FACD /* Supporting Files */,
+			);
+			path = EditableTableView;
+			sourceTree = "<group>";
+		};
+		3D78116C1C05B8F60063FACD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3D78116D1C05B8F60063FACD /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3D7811831C05B9240063FACD /* KVIEditableTableVIew */ = {
+			isa = PBXGroup;
+			children = (
+				3D57BA381C0DC3F900896ADA /* KVIEditableColumnPrototypeView */,
+				3D7811841C05B9510063FACD /* KVIEditableTableView.h */,
+				3D7811851C05B9510063FACD /* KVIEditableTableView.m */,
+				3D57BA2C1C0C8C4700896ADA /* KVIEditableTableView+Editing.h */,
+				3D57BA2D1C0C8C4700896ADA /* KVIEditableTableView+Editing.m */,
+				3DFDA2151C064D070062CCD8 /* KVIColumnsCell.h */,
+				3DFDA2161C064D070062CCD8 /* KVIColumnsCell.m */,
+				3D57BA351C0CBF1500896ADA /* KVIEditableTablePrototypeView.h */,
+				3D57BA361C0CBF1500896ADA /* KVIEditableTablePrototypeView.m */,
+			);
+			name = KVIEditableTableVIew;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3D7811681C05B8F60063FACD /* EditableTableView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D7811801C05B8F60063FACD /* Build configuration list for PBXNativeTarget "EditableTableView" */;
+			buildPhases = (
+				3D7811651C05B8F60063FACD /* Sources */,
+				3D7811661C05B8F60063FACD /* Frameworks */,
+				3D7811671C05B8F60063FACD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EditableTableView;
+			productName = EditableTableView;
+			productReference = 3D7811691C05B8F60063FACD /* EditableTableView.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3D7811611C05B8F60063FACD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Vasyl Khmil";
+				TargetAttributes = {
+					3D7811681C05B8F60063FACD = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = J6L4QH59CC;
+					};
+				};
+			};
+			buildConfigurationList = 3D7811641C05B8F60063FACD /* Build configuration list for PBXProject "EditableTableView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3D7811601C05B8F60063FACD;
+			productRefGroup = 3D78116A1C05B8F60063FACD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3D7811681C05B8F60063FACD /* EditableTableView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3D7811671C05B8F60063FACD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D78117C1C05B8F60063FACD /* LaunchScreen.storyboard in Resources */,
+				3D7811791C05B8F60063FACD /* Assets.xcassets in Resources */,
+				3D57BA3A1C0DC41A00896ADA /* KVIEditableColumnPrototypeView.xib in Resources */,
+				3D7811771C05B8F60063FACD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3D7811651C05B8F60063FACD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D57BA371C0CBF1500896ADA /* KVIEditableTablePrototypeView.m in Sources */,
+				3D7811861C05B9510063FACD /* KVIEditableTableView.m in Sources */,
+				3DFDA2171C064D070062CCD8 /* KVIColumnsCell.m in Sources */,
+				3D7811741C05B8F60063FACD /* ViewController.m in Sources */,
+				3D7811711C05B8F60063FACD /* AppDelegate.m in Sources */,
+				3D57BA451C0DC50800896ADA /* UIView+IBINSPECTABLE.m in Sources */,
+				3D57BA441C0DC50800896ADA /* UIView+AnimatedPresentation.m in Sources */,
+				3D57BA341C0CBEBE00896ADA /* KVIEditableColumnPrototypeView.m in Sources */,
+				3D57BA3E1C0DC48000896ADA /* KVICustomView.m in Sources */,
+				3D78116E1C05B8F60063FACD /* main.m in Sources */,
+				3D57BA2E1C0C8C4700896ADA /* KVIEditableTableView+Editing.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3D7811751C05B8F60063FACD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D7811761C05B8F60063FACD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3D78117A1C05B8F60063FACD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D78117B1C05B8F60063FACD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3D78117E1C05B8F60063FACD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3D78117F1C05B8F60063FACD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3D7811811C05B8F60063FACD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = EditableTableView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.EditableTableView.VasylKhmil";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3D7811821C05B8F60063FACD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = EditableTableView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "-.EditableTableView.VasylKhmil";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3D7811641C05B8F60063FACD /* Build configuration list for PBXProject "EditableTableView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D78117E1C05B8F60063FACD /* Debug */,
+				3D78117F1C05B8F60063FACD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D7811801C05B8F60063FACD /* Build configuration list for PBXNativeTarget "EditableTableView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D7811811C05B8F60063FACD /* Debug */,
+				3D7811821C05B8F60063FACD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3D7811611C05B8F60063FACD /* Project object */;
+}
