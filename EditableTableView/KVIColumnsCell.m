@@ -31,6 +31,14 @@
     
 }
 
+#pragma mark - Override
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    
+    [self clearView];
+}
+
 #pragma mark - Private
 
 - (void)readData {
@@ -50,6 +58,12 @@
     
     self.columnWidths = widths;
     self.columnViews = views;
+}
+
+- (void)clearView {
+    for (UIView *subview in self.contentView.subviews) {
+        [subview removeFromSuperview];
+    }
 }
 
 #pragma mark - Building

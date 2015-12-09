@@ -9,18 +9,31 @@
 #import "ViewController.h"
 #import "KVIEditableTableView.h"
 
-@interface ViewController () <KVIEditableTableViewDataSource, UITabBarDelegate>
+@interface ViewController () <KVIEditableTableViewDataSource, KVIEditableTableViewDelegate, UITabBarDelegate>
 
 @property (weak, nonatomic) IBOutlet KVIEditableTableView *editableTableView;
+
+@property (nonatomic, strong) NSMutableArray *widths;
 
 @end
 
 @implementation ViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.widths = [NSMutableArray arrayWithArray:@[@(KVIColumnsDynamicWidth), @(80), @(70), @(90)]];
+}
+
 #pragma mark - Actions
 
 - (IBAction)switchButtonPressed {
-    [self.editableTableView startColumnsEditing];
+    
+    if (self.editableTableView.columnsIsEditing) {
+        [self.editableTableView endColumnsEditing];
+    } else {
+        [self.editableTableView startColumnsEditing];
+    }
 }
 
 #pragma mark - KVIEditableTableViewDataSource
@@ -30,24 +43,46 @@
 }
 
 - (NSInteger)numberOfColumnsInTableView:(KVIEditableTableView *)tableView {
-    return 3;
+    return self.widths.count;
 }
 
 - (CGFloat)tableView:(KVIEditableTableView *)tableView widthForColumnAtIndex:(NSUInteger)columnIndex {
-    if (columnIndex != 0) {
-        return 150;
-        
-    } else {
-        return KVIColumnsDynamicWidth;
-    }
+    return ((NSNumber *)self.widths[columnIndex]).floatValue;
 }
 
 - (UIView *)tableView:(KVIEditableTableView *)tableView columnViewForRowAtIndexPath:(NSIndexPath *)indexPath atColumnIndex:(NSUInteger)columnIndex {
     UILabel *label = [UILabel new];
     
-    label.text = @"test";
+    label.text = [NSString stringWithFormat:@"c:%li r:%li", columnIndex, indexPath.row];
     
     return label;
+}
+
+#pragma mark - KVIEditableTableViewDelegate
+
+- (void)tableView:(KVIEditableTableView *)tableView swapedColumnAtIndex:(NSUInteger)firstColumnIndex withColumnAtIndex:(NSUInteger)secondColumnIndex {
+    
+    
+    NSNumber *temp = self.widths[firstColumnIndex];
+    self.widths[firstColumnIndex] = self.widths[secondColumnIndex];
+    self.widths[secondColumnIndex] = temp;
+
+}
+
+- (void)tableView:(KVIEditableTableView *)tableView resizedColumngAtIndex:(NSUInteger)collumnIndex toSize:(CGFloat)newSize {
+    NSNumber *width = self.widths[collumnIndex];
+    
+    if (width.floatValue != KVIColumnsDynamicWidth) {
+        self.widths[collumnIndex] = @(newSize);
+    }
+}
+
+- (void)tableView:(KVIEditableTableView *)tableView removedColumnAtIndex:(NSUInteger)columnIndex {
+    [self.widths removeObjectAtIndex:columnIndex];
+}
+
+- (void)tableView:(KVIEditableTableView *)tableView addedColumnWithWidht:(CGFloat)width {
+    [self.widths addObject:@(width)];
 }
 
 @end

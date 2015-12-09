@@ -8,11 +8,9 @@
 
 #import "KVIEditableTableView.h"
 #import "KVIColumnsCell.h"
+#import <objc/runtime.h>
 
 @interface KVIEditableTableView () <UITableViewDataSource, UITableViewDelegate, KVIColumnsCellDataSource>
-
-@property (nonatomic, weak) id<UITableViewDataSource> realDataSorce;
-@property (nonatomic, weak) id<UITableViewDelegate> realDelegate;
 
 @property (nonatomic, strong) NSArray *columnWidths;
 
@@ -49,27 +47,11 @@ CGFloat KVIColumnsDynamicWidth = -1;
 }
 
 - (void)makeCustomInitialization {
-    super.delegate = self;
-    super.dataSource = self;
+    self.delegate = self;
+    self.dataSource = self;
 }
 
 #pragma mark - Override
-
-- (void)setDelegate:(id<UITableViewDelegate>)delegate {
-    self.realDelegate = delegate;
-}
-
-- (void)setDataSource:(id<UITableViewDataSource>)dataSource {
-    self.realDataSorce = dataSource;
-}
-
-- (id<UITableViewDelegate>)delegate {
-    return self.realDelegate;
-}
-
-- (id<UITableViewDataSource>)dataSource {
-    return self.realDataSorce;
-}
 
 - (void)reloadData {
     [self readData];
@@ -77,16 +59,70 @@ CGFloat KVIColumnsDynamicWidth = -1;
     [super reloadData];
 }
 
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    BOOL selfRespond = [super respondsToSelector:aSelector];
+    if (!selfRespond) {
+        
+        id<NSObject> responder = [self responderForSelector:aSelector];
+        
+        return [responder respondsToSelector:aSelector];
+        
+    } else {
+        return TRUE;
+    }
+}
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
+    id<NSObject> responder = [self responderForSelector:anInvocation.selector];
+    
+    if (responder != nil) {
+        [anInvocation invokeWithTarget:responder];
+        
+    } else {
+        [super forwardInvocation:anInvocation];
+    }
+}
+
 #pragma mark - Private
 
+- (id<NSObject>)responderForSelector:(SEL)aSelector {
+    
+    if (aSelector == @selector(tableView:numberOfRowsInSection:)) {
+        
+    }
+    
+    struct objc_method_description optionalMethodDescription = protocol_getMethodDescription(@protocol(UITableViewDataSource), aSelector, FALSE, TRUE);
+    struct objc_method_description requiredMethodDescription = protocol_getMethodDescription(@protocol(UITableViewDataSource), aSelector, TRUE, TRUE);
+    
+    if (optionalMethodDescription.name != NULL ||
+        requiredMethodDescription.name != NULL) {
+        
+        return self.editableDataSource;
+        
+    } else {
+        
+        struct objc_method_description optionalMethodDescription = protocol_getMethodDescription(@protocol(UITableViewDataSource), aSelector, FALSE, TRUE);
+        struct objc_method_description requiredMethodDescription = protocol_getMethodDescription(@protocol(UITableViewDataSource), aSelector, TRUE, TRUE);
+        
+        if (optionalMethodDescription.name != NULL ||
+            requiredMethodDescription.name != NULL) {
+            
+            return self.editableDelegate;
+            
+        }
+    }
+    
+    return nil;
+}
+
 - (void)readData {
-    NSUInteger numberOfColumns = [self.dataSource numberOfColumnsInTableView:self];
+    NSUInteger numberOfColumns = [self.editableDataSource numberOfColumnsInTableView:self];
     
     NSMutableArray *widths = [NSMutableArray new];
     
     for (int i = 0; i < numberOfColumns; ++i) {
         
-        CGFloat width = [self.dataSource tableView:self widthForColumnAtIndex:i];
+        CGFloat width = [self.editableDataSource tableView:self widthForColumnAtIndex:i];
         
         [widths addObject:@(width)];
     }
@@ -95,10 +131,6 @@ CGFloat KVIColumnsDynamicWidth = -1;
 }
 
 #pragma mark - UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.realDataSorce tableView:self numberOfRowsInSection:section];
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -113,7 +145,7 @@ CGFloat KVIColumnsDynamicWidth = -1;
         cell.dataSource = self;
     }
     
-    [cell reload];
+    cell.indexPath = indexPath;
     
     return cell;
 }
@@ -135,11 +167,12 @@ CGFloat KVIColumnsDynamicWidth = -1;
 }
 
 - (UIView *)columntsCell:(KVIColumnsCell *)cell viewForColumnAtIndex:(NSUInteger)index {
-    NSIndexPath *indexPath = [self indexPathForCell:cell];
     
-    return [self.dataSource tableView:self
-          columnViewForRowAtIndexPath:indexPath
-                        atColumnIndex:index];
+    
+    return [self.editableDataSource tableView:self
+                  columnViewForRowAtIndexPath:cell.indexPath
+                                atColumnIndex:index];
+    return nil;
 }
 
 @end

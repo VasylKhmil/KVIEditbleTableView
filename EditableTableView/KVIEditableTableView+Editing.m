@@ -11,6 +11,8 @@
 
 @implementation KVIEditableTableView (Editing)
 
+static NSInteger KVIEditingPrototypeViewTag = -1;
+
 - (void)startColumnsEditing {
     
     self.scrollEnabled = FALSE;
@@ -19,10 +21,31 @@
     
 }
 
+- (void)endColumnsEditing {
+    self.scrollEnabled = TRUE;
+    
+    KVIEditableTablePrototypeView *prototypeView = [self viewWithTag:KVIEditingPrototypeViewTag];
+    
+    [prototypeView removeConstraints:prototypeView.constraints];
+    
+    [prototypeView removeFromSuperview];
+    
+    [self reloadData];
+}
+
+- (BOOL)columnsIsEditing {
+    return [self viewWithTag:KVIEditingPrototypeViewTag] != nil;
+}
+
+
 #pragma mark - Private
 
 - (void)addEditingPrototypeView {
     KVIEditableTablePrototypeView *prototypeView = [[KVIEditableTablePrototypeView alloc] initWithInitialWidths:self.columnWidths];
+    
+    prototypeView.delegate = self;
+    
+    prototypeView.tag = KVIEditingPrototypeViewTag;
     
     [self addSubview:prototypeView];
     
@@ -66,13 +89,67 @@
 
 #pragma mark - KVIEditableTablePrototypeViewDelegate
 
-- (BOOL)tablePrototypeView:(KVIEditableTablePrototypeView *)tablePrototype canResizeColumnAtIndex:(NSUInteger)columnIndex {
+- (BOOL)tablePrototypeViewCanResizeColumns:(KVIEditableTablePrototypeView *)tablePrototype {
     
-    if ([self.delegate respondsToSelector:@selector(tableView:canResizeColumnAtIndex:)]) {
-        return [self.delegate tableView:self canResizeColumnAtIndex:columnIndex];
+    if ([self.editableDelegate respondsToSelector:@selector(tableViewCanResizeColumns:)]) {
+        return [self.editableDelegate tableViewCanResizeColumns:self];
     }
     
     return TRUE;
+}
+
+- (BOOL)tablePrototypeViewCanSwapColumns:(KVIEditableTablePrototypeView *)tablePrototype {
+    if ([self.editableDelegate respondsToSelector:@selector(tableViewCanSwapColumns:)]) {
+        return [self.editableDelegate tableViewCanSwapColumns:self];
+    }
+    
+    return TRUE;
+}
+
+- (BOOL)tablePrototypeView:(KVIEditableTablePrototypeView *)tablePrototype canRemoveColumnAtIndex:(NSUInteger)columnIndex {
+    if ([self.editableDelegate respondsToSelector:@selector(tableView:canRemoveColumnAtIndex:)]) {
+        return [self.editableDelegate tableView:self canRemoveColumnAtIndex:columnIndex];
+    }
+    
+    return TRUE;
+}
+
+- (BOOL)tablePrototypeViewCanAddNewColumns:(KVIEditableTablePrototypeView *)tablePrototype {
+    if ([self.editableDelegate respondsToSelector:@selector(tableViewCanAddNewColumns:)]) {
+        return [self.editableDelegate tableViewCanAddNewColumns:self];
+    }
+    
+    return TRUE;
+}
+
+- (void)tablePrototypeView:(KVIEditableTablePrototypeView *)tablePrototype resizedColumnAtIndex:(NSUInteger)columnIndex toSize:(CGFloat)newSize {
+    
+    if ([self.editableDelegate respondsToSelector:@selector(tableView:resizedColumngAtIndex:toSize:)]) {
+        [self.editableDelegate tableView:self resizedColumngAtIndex:columnIndex toSize:newSize];
+    }
+}
+
+- (void)tablePrototypeView:(KVIEditableTablePrototypeView *)tablePrototype swapedColumnAtIndex:(NSUInteger)firstColumnIndex withColumnAtIndex:(NSUInteger)secondColumnIndex {
+    
+    if ([self.editableDelegate respondsToSelector:@selector(tableView:swapedColumnAtIndex:withColumnAtIndex:)]) {
+        [self.editableDelegate tableView:self swapedColumnAtIndex:firstColumnIndex withColumnAtIndex:secondColumnIndex];
+    }
+}
+
+- (void)tablePrototypeView:(KVIEditableTablePrototypeView *)tablePrototype removedColumnAtIndex:(NSUInteger)columnIndex {
+    
+    if ([self.editableDelegate respondsToSelector:@selector(tableView:removedColumnAtIndex:)]) {
+        [self.editableDelegate tableView:self removedColumnAtIndex:columnIndex];
+    }
+    
+}
+
+- (void)tablePrototypeView:(KVIEditableTablePrototypeView *)tablePrototype addedColumnWithWidht:(CGFloat)width {
+    
+    if ([self.editableDelegate respondsToSelector:@selector(tableView:addedColumnWithWidht:)]) {
+        [self.editableDelegate tableView:self addedColumnWithWidht:width];
+    }
+    
 }
 
 @end

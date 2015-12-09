@@ -12,6 +12,4 @@
 
 @interface KVIEditableTableView (Editing) <KVIEditableTablePrototypeViewDelegate>
 
-- (void)startColumnsEditing;
-
 @end

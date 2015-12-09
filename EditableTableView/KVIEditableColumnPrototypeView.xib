@@ -12,21 +12,44 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COLUMN" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwX-La-Y9c">
-                    <rect key="frame" x="0.0" y="284" width="219" height="36"/>
+                    <rect key="frame" x="0.0" y="283.5" width="219" height="36"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9TC-eS-ldu">
+                    <rect key="frame" x="0.0" y="0.0" width="1" height="603"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="fHv-Rb-0qe"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UaV-79-Sbd">
+                    <rect key="frame" x="218" y="0.0" width="1" height="603"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="E48-Aq-lpk"/>
+                    </constraints>
+                </view>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
+                <constraint firstItem="UaV-79-Sbd" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="3QC-Od-Om9"/>
                 <constraint firstItem="vwX-La-Y9c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5Ye-85-byQ"/>
                 <constraint firstItem="vwX-La-Y9c" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="H7o-GL-5Lp"/>
+                <constraint firstAttribute="trailing" secondItem="UaV-79-Sbd" secondAttribute="trailing" id="V1f-Z6-EXj"/>
+                <constraint firstItem="9TC-eS-ldu" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="cg4-b6-DQI"/>
+                <constraint firstItem="UaV-79-Sbd" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eWX-LY-Odd"/>
                 <constraint firstItem="vwX-La-Y9c" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="gXi-gr-3jD"/>
+                <constraint firstItem="9TC-eS-ldu" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="kEh-xj-6z5"/>
                 <constraint firstAttribute="trailing" secondItem="vwX-La-Y9c" secondAttribute="trailing" id="mfW-fr-fiQ"/>
+                <constraint firstItem="9TC-eS-ldu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nI1-gP-zWb"/>
+                <constraint firstItem="9TC-eS-ldu" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="nxs-aF-Mep"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -43,6 +66,11 @@
                     <color key="value" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="0.0" colorSpace="calibratedRGB"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="kEh-xj-6z5"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="319.5" y="333.5"/>
         </view>
     </objects>

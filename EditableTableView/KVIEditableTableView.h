@@ -26,9 +26,21 @@
 @optional
 - (NSString *)tableView:(KVIEditableTableView *)tableView editTitleForColumnAtIndex:(NSUInteger)columnIndex;
 
-- (BOOL)tableView:(KVIEditableTableView *)tableView canResizeColumnAtIndex:(NSUInteger)columnIndex;
+- (BOOL)tableViewCanResizeColumns:(KVIEditableTableView *)tableView;
 
 - (void)tableView:(KVIEditableTableView *)tableView resizedColumngAtIndex:(NSUInteger)collumnIndex toSize:(CGFloat)newSize;
+
+- (BOOL)tableViewCanSwapColumns:(KVIEditableTableView *)tableView;
+
+- (void)tableView:(KVIEditableTableView *)tableView swapedColumnAtIndex:(NSUInteger)firstColumnIndex withColumnAtIndex:(NSUInteger)secondColumnIndex;
+
+- (BOOL)tableView:(KVIEditableTableView *)tableView canRemoveColumnAtIndex:(NSUInteger)columnIndex;
+
+- (void)tableView:(KVIEditableTableView *)tableView removedColumnAtIndex:(NSUInteger)columnIndex;
+
+- (BOOL)tableViewCanAddNewColumns:(KVIEditableTableView *)tableView;
+
+- (void)tableView:(KVIEditableTableView *)tableView addedColumnWithWidht:(CGFloat)width;
 
 @end
 
@@ -38,12 +50,16 @@ extern CGFloat KVIColumnsDynamicWidth;
 
 @interface KVIEditableTableView : UITableView
 
-@property (nonatomic, weak) id<KVIEditableTableViewDataSource> IBOutlet dataSource;
+@property (nonatomic, weak) IBOutlet id<KVIEditableTableViewDataSource> editableDataSource;
 
-@property (nonatomic, weak) id<KVIEditableTableViewDelegate> IBOutlet delegate;
+@property (nonatomic, weak) IBOutlet id<KVIEditableTableViewDelegate> editableDelegate;
 
-@property (nonatomic, readonly) NSArray *columnWidths;;
+@property (nonatomic, readonly) NSArray *columnWidths;
+
+@property (nonatomic, readonly) BOOL columnsIsEditing;
 
 - (void)startColumnsEditing;
+
+- (void)endColumnsEditing;
 
 @end

@@ -32,6 +32,8 @@
 
 @property (nonatomic, readonly) NSUInteger numberOfColumns;
 
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
 - (void)reload;
 
 @end

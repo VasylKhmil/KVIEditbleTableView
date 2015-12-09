@@ -11,6 +11,12 @@
 #import "KVIEditableTableView.h"
 
 
+typedef NS_ENUM(NSInteger, KVIPanMode) {
+    KVIPanModeResize,
+    KVIPanModeReplace,
+    KVIPanModeNone
+};
+
 
 @interface KVIEditableTablePrototypeView ()
 
@@ -19,6 +25,11 @@
 @property (nonatomic, strong) NSMutableArray<KVIEditableColumnPrototypeView *> *prototypes;
 
 @property (nonatomic, strong) NSLayoutConstraint *lastPrototypeTrailingConstraint;
+
+@property (nonatomic, strong) KVIEditableColumnPrototypeView *resizingLeftView;
+@property (nonatomic, strong) KVIEditableColumnPrototypeView *resizingRightView;
+
+@property (nonatomic) KVIPanMode panMode;
 
 @end
 
@@ -31,7 +42,7 @@ static const CGFloat KVIMinimumColumnWidth = 10;
 
 @implementation KVIEditableTablePrototypeView
 
-#pragma mark - initialization
+#pragma mark - Initialization
 
 - (instancetype)initWithInitialWidths:(NSArray<NSNumber *> *)widths {
     
@@ -201,11 +212,7 @@ static const CGFloat KVIMinimumColumnWidth = 10;
 
 - (void)addGesturesToColumnPrototype:(KVIEditableColumnPrototypeView *)columnPrototype {
     
-    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGestureUsed:)];
-    
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureUsed:)];
-    
-    //    [columnPrototype addGestureRecognizer:pinchGesture];
     
     [columnPrototype addGestureRecognizer:panGesture];
     
@@ -216,9 +223,42 @@ static const CGFloat KVIMinimumColumnWidth = 10;
 - (void)panGestureUsed:(UIPanGestureRecognizer *)gesture {
     KVIEditableColumnPrototypeView *columnPrototype = (KVIEditableColumnPrototypeView*)gesture.view;
     
+    NSInteger columnPtototypeIndex = [self.prototypes indexOfObject:columnPrototype];
+    
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        columnPrototype.selected = TRUE;
-        [self bringSubviewToFront:columnPrototype];
+        
+        CGPoint touchLocation = [gesture locationInView:columnPrototype];
+        
+        CGFloat resizeDelta = MIN(10, 0.2 * columnPrototype.frame.size.width);
+        
+        if (touchLocation.x < resizeDelta   &&
+            columnPtototypeIndex > 0        &&
+            [self canResizeColumns]) {
+            
+            self.resizingLeftView = self.prototypes[columnPtototypeIndex - 1];
+            self.resizingRightView = self.prototypes[columnPtototypeIndex];
+            
+            self.panMode = KVIPanModeResize;
+            
+        } else if (touchLocation.x > columnPrototype.frame.size.width - resizeDelta &&
+                   columnPtototypeIndex < self.prototypes.count - 1                 &&
+                   [self canResizeColumns]) {
+            
+            self.resizingLeftView = self.prototypes[columnPtototypeIndex];
+            self.resizingRightView = self.prototypes[columnPtototypeIndex + 1];
+            
+            self.panMode = KVIPanModeResize;
+            
+        } else if ([self canSwapColumns]) {
+            
+            columnPrototype.selected = TRUE;
+            [self bringSubviewToFront:columnPrototype];
+            
+            self.panMode = KVIPanModeReplace;
+            
+        } else {
+            self.panMode = KVIPanModeNone;
+        }
         
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
         
@@ -226,24 +266,51 @@ static const CGFloat KVIMinimumColumnWidth = 10;
         
         CGPoint velocity = [gesture velocityInView:columnPrototype];
         
-        if (fabs(velocity.x) > fabs(velocity.y)) {
+        if (self.panMode == KVIPanModeReplace) {
             
-            translation.x = MAX(-columnPrototype.frame.origin.x, translation.x);
+            if (fabs(velocity.x) > fabs(velocity.y)) {
+                
+                translation.x = MAX(-columnPrototype.frame.origin.x, translation.x);
+                
+                translation.x = MIN(translation.x, self.bounds.size.width - CGRectGetMaxX(columnPrototype.frame));
+                
+                columnPrototype.transform = CGAffineTransformTranslate(columnPrototype.transform, translation.x, 0);
+                
+            } else if ([self columnPrototypeCanBeDeleted:columnPrototype]) {
+                
+                translation.y = MIN(translation.y, self.bounds.size.height - CGRectGetMaxY(columnPrototype.frame));
+                
+                columnPrototype.transform = CGAffineTransformTranslate(columnPrototype.transform, 0, translation.y);
+            }
             
-            translation.x = MIN(translation.x, self.bounds.size.width - CGRectGetMaxX(columnPrototype.frame));
-        
-            columnPrototype.transform = CGAffineTransformTranslate(columnPrototype.transform, translation.x, 0);
-        
-        } else if ([self columnPrototypeCanBeDeleted:columnPrototype]) {
+            [self updatePrototypesAfterMovingWithMovingPrototype:columnPrototype velocity:velocity];
             
-            translation.y = MIN(translation.y, self.bounds.size.height - CGRectGetMaxY(columnPrototype.frame));
             
-            columnPrototype.transform = CGAffineTransformTranslate(columnPrototype.transform, 0, translation.y);
+        } else if (self.panMode == KVIPanModeResize) {
+            NSLog(@"%f", translation.x);
+            if (fabs(velocity.x) < fabs(velocity.y)) {
+                self.resizingLeftView.widthConstraint.constant = self.resizingLeftView.widthConstraint.constant - translation.x;
+                self.resizingRightView.widthConstraint.constant = self.resizingRightView.widthConstraint.constant + translation.x;
+                
+            
+            } else {
+                self.resizingRightView.widthConstraint.constant = self.resizingRightView.widthConstraint.constant - translation.x;
+                self.resizingLeftView.widthConstraint.constant = self.resizingLeftView.widthConstraint.constant + translation.x;
+            }
+            
+            if ([self.delegate respondsToSelector:@selector(tablePrototypeView:resizedColumnAtIndex:toSize:)]) {
+                
+                NSUInteger leftColumnIndex = [self.prototypes indexOfObject:self.resizingLeftView];
+                NSUInteger rightColumnIndex = [self.prototypes indexOfObject:self.resizingRightView];
+                
+                [self.delegate tablePrototypeView:self resizedColumnAtIndex:leftColumnIndex toSize:self.resizingLeftView.widthConstraint.constant];
+                [self.delegate tablePrototypeView:self resizedColumnAtIndex:rightColumnIndex toSize:self.resizingRightView.widthConstraint.constant];
+            }
+            
+            [self layoutIfNeeded];
         }
         
         [gesture setTranslation:CGPointZero inView:columnPrototype];
-        
-        [self updatePrototypesAfterMovingWithMovingPrototype:columnPrototype velocity:velocity];
         
     } else {
         
@@ -254,14 +321,40 @@ static const CGFloat KVIMinimumColumnWidth = 10;
         } else {
         
             columnPrototype.transform = CGAffineTransformIdentity;
-            columnPrototype.selected = FALSE;
         }
         
+        columnPrototype.selected = FALSE;
+        self.panMode = KVIPanModeNone;
         
     }
 }
 
 #pragma mark - Private
+#pragma mark - Private(Delegation)
+
+- (BOOL)canResizeColumns {
+    BOOL canResize = FALSE;
+    
+    if ([self.delegate respondsToSelector:@selector(tablePrototypeViewCanResizeColumns:)]) {
+        
+        canResize = [self.delegate tablePrototypeViewCanResizeColumns:self];
+    }
+    
+    return canResize;
+}
+
+- (BOOL)canSwapColumns {
+    BOOL canSwap = FALSE;
+    
+    if ([self.delegate respondsToSelector:@selector(tablePrototypeViewCanSwapColumns:)]) {
+        
+        canSwap = [self.delegate tablePrototypeViewCanSwapColumns:self];
+    }
+    
+    return canSwap;
+}
+
+#pragma mark - Private(Event)
 
 - (void)updatePrototypesAfterMovingWithMovingPrototype:(KVIEditableColumnPrototypeView *)prototypeView velocity:(CGPoint)velocity {
     NSInteger index = [self.prototypes indexOfObject:prototypeView];
@@ -345,6 +438,11 @@ static const CGFloat KVIMinimumColumnWidth = 10;
         [self updateLastTrailingConstraintWithNewPrototype:firstColumnPrototype];
     }
     
+    if ([self.delegate respondsToSelector:@selector(tablePrototypeView:swapedColumnAtIndex:withColumnAtIndex:)]) {
+        
+        [self.delegate tablePrototypeView:self swapedColumnAtIndex:firstColumnIndex withColumnAtIndex:firstColumnIndex + 1];
+    }
+    
     [self layoutIfNeeded];
 }
 
@@ -354,7 +452,7 @@ static const CGFloat KVIMinimumColumnWidth = 10;
     NSUInteger columnIndex = [self.prototypes indexOfObject:columnPrototype];
     
     if ([self.delegate respondsToSelector:@selector(tablePrototypeView:canResizeColumnAtIndex:)]) {
-        canResizeColumn = [self.delegate tablePrototypeView:self canResizeColumnAtIndex:columnIndex];
+        canResizeColumn = [self.delegate tablePrototypeViewCanResizeColumns:self];
     }
     
     if (!canResizeColumn) {
@@ -388,7 +486,18 @@ static const CGFloat KVIMinimumColumnWidth = 10;
 }
 
 - (BOOL)columnPrototypeShouldBeDeleted:(KVIEditableColumnPrototypeView *)columnPrototype {
-    return CGRectGetMidY(columnPrototype.frame) <= 0 && [self columnPrototypeCanBeDeleted:columnPrototype];
+    BOOL shouldBeDeleted = FALSE;
+    
+    if ([self.delegate respondsToSelector:@selector(tablePrototypeView:canRemoveColumnAtIndex:)]) {
+        
+        NSUInteger columnIndex = [self.prototypes indexOfObject:columnPrototype];
+        
+        shouldBeDeleted = [self.delegate tablePrototypeView:self canRemoveColumnAtIndex:columnIndex];
+    }
+    
+    shouldBeDeleted = shouldBeDeleted && (CGRectGetMidY(columnPrototype.frame) <= 0) && ([self columnPrototypeCanBeDeleted:columnPrototype]);
+    
+    return shouldBeDeleted;
 }
 
 - (void)deleteColumnPrototypeAtIndex:(NSUInteger)columnPrototypeIndex {
@@ -407,6 +516,10 @@ static const CGFloat KVIMinimumColumnWidth = 10;
                          withPrototype:nextPrototype];
     
     [mutablePrototypes removeObjectAtIndex:columnPrototypeIndex];
+    
+    if ([self.delegate respondsToSelector:@selector(tablePrototypeView:removedColumnAtIndex:)]) {
+        [self.delegate tablePrototypeView:self removedColumnAtIndex:columnPrototypeIndex];
+    }
     
 }
 
