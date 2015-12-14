@@ -152,4 +152,13 @@ static NSInteger KVIEditingPrototypeViewTag = -1;
     
 }
 
+- (NSString *)tablePrototypeView:(KVIEditableColumnPrototypeView *)tablePrototype headerForColumnAtIndex:(NSUInteger)columnIndex {
+    
+    if ([self.editableDataSource respondsToSelector:@selector(tableView:headerForColumnAtIndex:)]) {
+        return [self.editableDataSource tableView:self headerForColumnAtIndex:columnIndex];
+    }
+    
+    return nil;
+}
+
 @end

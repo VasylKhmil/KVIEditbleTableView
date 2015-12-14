@@ -21,6 +21,7 @@
 		3D7811791C05B8F60063FACD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D7811781C05B8F60063FACD /* Assets.xcassets */; };
 		3D78117C1C05B8F60063FACD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D78117A1C05B8F60063FACD /* LaunchScreen.storyboard */; };
 		3D7811861C05B9510063FACD /* KVIEditableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7811851C05B9510063FACD /* KVIEditableTableView.m */; };
+		3DB898911C1A2781008C24A8 /* UIView+KVIColumns.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB898901C1A2781008C24A8 /* UIView+KVIColumns.m */; };
 		3DFDA2171C064D070062CCD8 /* KVIColumnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFDA2161C064D070062CCD8 /* KVIColumnsCell.m */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,8 @@
 		3D78117D1C05B8F60063FACD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D7811841C05B9510063FACD /* KVIEditableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVIEditableTableView.h; sourceTree = "<group>"; };
 		3D7811851C05B9510063FACD /* KVIEditableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVIEditableTableView.m; sourceTree = "<group>"; };
+		3DB8988F1C1A2781008C24A8 /* UIView+KVIColumns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+KVIColumns.h"; sourceTree = "<group>"; };
+		3DB898901C1A2781008C24A8 /* UIView+KVIColumns.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+KVIColumns.m"; sourceTree = "<group>"; };
 		3DFDA2151C064D070062CCD8 /* KVIColumnsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVIColumnsCell.h; sourceTree = "<group>"; };
 		3DFDA2161C064D070062CCD8 /* KVIColumnsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVIColumnsCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +144,8 @@
 		3D7811831C05B9240063FACD /* KVIEditableTableVIew */ = {
 			isa = PBXGroup;
 			children = (
+				3DB8988F1C1A2781008C24A8 /* UIView+KVIColumns.h */,
+				3DB898901C1A2781008C24A8 /* UIView+KVIColumns.m */,
 				3D57BA381C0DC3F900896ADA /* KVIEditableColumnPrototypeView */,
 				3D7811841C05B9510063FACD /* KVIEditableTableView.h */,
 				3D7811851C05B9510063FACD /* KVIEditableTableView.m */,
@@ -231,6 +236,7 @@
 				3DFDA2171C064D070062CCD8 /* KVIColumnsCell.m in Sources */,
 				3D7811741C05B8F60063FACD /* ViewController.m in Sources */,
 				3D7811711C05B8F60063FACD /* AppDelegate.m in Sources */,
+				3DB898911C1A2781008C24A8 /* UIView+KVIColumns.m in Sources */,
 				3D57BA451C0DC50800896ADA /* UIView+IBINSPECTABLE.m in Sources */,
 				3D57BA441C0DC50800896ADA /* UIView+AnimatedPresentation.m in Sources */,
 				3D57BA341C0CBEBE00896ADA /* KVIEditableColumnPrototypeView.m in Sources */,

@@ -9,10 +9,17 @@
 #import "KVIEditableTableView.h"
 #import "KVIColumnsCell.h"
 #import <objc/runtime.h>
+#import "UIView+KVIColumns.h"
 
 @interface KVIEditableTableView () <UITableViewDataSource, UITableViewDelegate, KVIColumnsCellDataSource>
 
 @property (nonatomic, strong) NSArray *columnWidths;
+
+@property (nonatomic) BOOL showHeaders;
+
+@property (nonatomic) CGFloat headerHeight;
+
+@property (nonatomic, strong) NSArray *headers;
 
 @end
 
@@ -56,6 +63,8 @@ CGFloat KVIColumnsDynamicWidth = -1;
 - (void)reloadData {
     [self readData];
     
+    [self updateHeader];
+    
     [super reloadData];
 }
 
@@ -84,6 +93,39 @@ CGFloat KVIColumnsDynamicWidth = -1;
 }
 
 #pragma mark - Private
+
+- (UIView *)headerViewWithHeader:(NSString *)header {
+    UILabel *label = [UILabel new];
+    
+    label.font = [UIFont boldSystemFontOfSize:17];
+    
+    label.text = header;
+    
+    return label;
+}
+
+- (void)updateHeader {
+    if (self.showHeaders) {
+        UIView *headerView = [UIView new];
+        
+        [headerView kvi_startColumnsAdding];
+        
+        [self.headers enumerateObjectsUsingBlock:^(UIView*  _Nonnull header, NSUInteger idx, BOOL * _Nonnull stop) {
+            BOOL isLast = (header == self.headers.lastObject);
+            
+            NSNumber *width = self.columnWidths[idx];
+            if (width.floatValue == KVIColumnsDynamicWidth) {
+                width = nil;
+            }
+            
+            [headerView kvi_addNewColumn:header withWidth:width isLast:isLast];
+        }];
+        
+        headerView.frame = (CGRect){.origin = CGPointZero, .size = CGSizeMake(CGRectGetWidth(self.bounds), self.headerHeight)};
+        
+        self.tableHeaderView = headerView;
+    }
+}
 
 - (id<NSObject>)responderForSelector:(SEL)aSelector {
     
@@ -118,6 +160,24 @@ CGFloat KVIColumnsDynamicWidth = -1;
 - (void)readData {
     NSUInteger numberOfColumns = [self.editableDataSource numberOfColumnsInTableView:self];
     
+    if ([self.editableDelegate respondsToSelector:@selector(tableViewShouldShowHeaders:)]) {
+        self.showHeaders = [self.editableDelegate tableViewShouldShowHeaders:self];
+        
+    } else {
+        self.showHeaders = FALSE;
+    }
+    
+    if (self.showHeaders) {
+        if ([self.editableDataSource respondsToSelector:@selector(headerHeightForTableView:)]) {
+        
+            self.headerHeight = [self.editableDataSource headerHeightForTableView:self];
+        } else {
+            self.headerHeight  = 40;
+        }
+    }
+    
+    NSMutableArray *headers = [NSMutableArray new];
+    
     NSMutableArray *widths = [NSMutableArray new];
     
     for (int i = 0; i < numberOfColumns; ++i) {
@@ -125,9 +185,19 @@ CGFloat KVIColumnsDynamicWidth = -1;
         CGFloat width = [self.editableDataSource tableView:self widthForColumnAtIndex:i];
         
         [widths addObject:@(width)];
+        
+        if (self.showHeaders &&
+            [self.editableDataSource respondsToSelector:@selector(tableView:headerForColumnAtIndex:)]) {
+            NSString *header = [self.editableDataSource tableView:self headerForColumnAtIndex:i];
+            
+            UIView *headerView = [self headerViewWithHeader:header];
+            
+            [headers addObject:headerView];
+        }
     }
     
     self.columnWidths = widths;
+    self.headers = headers;
 }
 
 #pragma mark - UITableViewDataSource

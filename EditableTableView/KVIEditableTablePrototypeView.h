@@ -29,6 +29,8 @@
 
 - (void)tablePrototypeView:(nonnull KVIEditableTablePrototypeView *)tablePrototype addedColumnWithWidht:(CGFloat)width;
 
+- (nonnull NSString *)tablePrototypeView:(nonnull KVIEditableTablePrototypeView *)tablePrototype headerForColumnAtIndex:(NSUInteger)columnIndex;
+
 @end
 
 @interface KVIEditableTablePrototypeView : UIView

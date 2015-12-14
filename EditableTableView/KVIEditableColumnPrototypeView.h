@@ -14,6 +14,8 @@
 
 @interface KVIEditableColumnPrototypeView : KVICustomView
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
 @property (nonatomic, strong, nullable) NSLayoutConstraint *widthConstraint;
 
 @property (nonatomic, strong, nonnull) NSLayoutConstraint *leadingConstraint;

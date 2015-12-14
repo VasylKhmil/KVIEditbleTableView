@@ -58,6 +58,10 @@
     return label;
 }
 
+- (NSString *)tableView:(KVIEditableTableView *)tableView headerForColumnAtIndex:(NSUInteger)columnIndex {
+    return @"Header";
+}
+
 #pragma mark - KVIEditableTableViewDelegate
 
 - (void)tableView:(KVIEditableTableView *)tableView swapedColumnAtIndex:(NSUInteger)firstColumnIndex withColumnAtIndex:(NSUInteger)secondColumnIndex {
@@ -83,6 +87,10 @@
 
 - (void)tableView:(KVIEditableTableView *)tableView addedColumnWithWidht:(CGFloat)width {
     [self.widths addObject:@(width)];
+}
+
+- (BOOL)tableViewShouldShowHeaders:(KVIEditableTableView *)tableView {
+    return TRUE;
 }
 
 @end

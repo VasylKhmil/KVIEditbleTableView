@@ -18,6 +18,11 @@
 
 - (UIView *)tableView:(KVIEditableTableView *)tableView columnViewForRowAtIndexPath:(NSIndexPath *)indexPath atColumnIndex:(NSUInteger)columnIndex;
 
+@optional
+- (NSString *)tableView:(KVIEditableTableView *)tableView headerForColumnAtIndex:(NSUInteger) columnIndex;
+
+- (CGFloat)headerHeightForTableView:(KVIEditableTableView *)tableView;
+
 @end
 
 
@@ -41,6 +46,8 @@
 - (BOOL)tableViewCanAddNewColumns:(KVIEditableTableView *)tableView;
 
 - (void)tableView:(KVIEditableTableView *)tableView addedColumnWithWidht:(CGFloat)width;
+
+- (BOOL)tableViewShouldShowHeaders:(KVIEditableTableView *)tableView;
 
 @end
 

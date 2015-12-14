@@ -66,6 +66,8 @@ static const CGFloat KVIMinimumColumnWidth = 10;
     
     self.backgroundColor = [UIColor whiteColor];
     
+    [self.prototypes removeAllObjects];
+    
     for (NSNumber *width in self.widths) {
         
         [self addNewPrototypeColumnWithWidth:width.floatValue];
@@ -77,6 +79,13 @@ static const CGFloat KVIMinimumColumnWidth = 10;
 - (void)addNewPrototypeColumnWithWidth:(CGFloat)width {
     
     KVIEditableColumnPrototypeView *columnPrototype = [KVIEditableColumnPrototypeView new];
+    
+    if ([self.delegate respondsToSelector:@selector(tablePrototypeView:headerForColumnAtIndex:)]) {
+        columnPrototype.titleLabel.text = [self.delegate tablePrototypeView:self headerForColumnAtIndex:self.prototypes.count];
+        
+    } else {
+        columnPrototype.titleLabel.text = [NSString stringWithFormat:@"COLUMN %li", self.prototypes.count];
+    }
     
     [self addSubview:columnPrototype];
     

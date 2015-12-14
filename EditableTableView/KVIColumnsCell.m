@@ -17,6 +17,8 @@
 
 @property (nonatomic) NSUInteger numberOfColumns;
 
+@property (nonatomic) BOOL showHeaders;
+
 @end
 
 
