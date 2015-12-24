@@ -39,4 +39,6 @@
 
 - (nonnull instancetype)initWithInitialWidths:(nonnull NSArray<NSNumber*>*)widths;
 
+- (void)reloadWithWidths:(NSArray<NSNumber*>*)widths;
+
 @end

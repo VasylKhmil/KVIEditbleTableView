@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, KVIPanMode) {
 
 @interface KVIEditableTablePrototypeView ()
 
-@property (nonatomic, strong) NSArray *widths;
+@property (nonatomic, strong) NSMutableArray *widths;
 
 @property (nonatomic, strong) NSMutableArray<KVIEditableColumnPrototypeView *> *prototypes;
 
@@ -34,10 +34,7 @@ typedef NS_ENUM(NSInteger, KVIPanMode) {
 @end
 
 
-
-
 static const CGFloat KVIMinimumColumnWidth = 10;
-
 
 
 @implementation KVIEditableTablePrototypeView
@@ -50,7 +47,7 @@ static const CGFloat KVIMinimumColumnWidth = 10;
     
     if (self != nil) {
         
-        _widths = widths;
+        _widths = [widths mutableCopy];
         
         _prototypes = [NSMutableArray new];
     }
@@ -64,15 +61,7 @@ static const CGFloat KVIMinimumColumnWidth = 10;
     
     [super willMoveToWindow:newWindow];
     
-    self.backgroundColor = [UIColor whiteColor];
-    
-    [self.prototypes removeAllObjects];
-    
-    for (NSNumber *width in self.widths) {
-        
-        [self addNewPrototypeColumnWithWidth:width.floatValue];
-        
-    }
+    [self rebuild];
     
 }
 
@@ -84,7 +73,7 @@ static const CGFloat KVIMinimumColumnWidth = 10;
         columnPrototype.titleLabel.text = [self.delegate tablePrototypeView:self headerForColumnAtIndex:self.prototypes.count];
         
     } else {
-        columnPrototype.titleLabel.text = [NSString stringWithFormat:@"COLUMN %li", self.prototypes.count];
+        columnPrototype.titleLabel.text = [NSString stringWithFormat:@"COLUMN %li", (unsigned long)self.prototypes.count];
     }
     
     [self addSubview:columnPrototype];
@@ -338,7 +327,31 @@ static const CGFloat KVIMinimumColumnWidth = 10;
     }
 }
 
+- (void)reloadWithWidths:(NSArray<NSNumber *> *)widths {
+    self.widths = [widths mutableCopy];
+    
+    [self rebuild];
+}
+
 #pragma mark - Private
+
+- (void)rebuild {
+    self.backgroundColor = [UIColor whiteColor];
+    
+    for (UIView *prototype in self.prototypes) {
+        [prototype removeFromSuperview];
+    }
+    
+    [self.prototypes removeAllObjects];
+    
+    for (NSNumber *width in self.widths) {
+        
+        [self addNewPrototypeColumnWithWidth:width.floatValue];
+        
+    }
+    
+}
+
 #pragma mark - Private(Delegation)
 
 - (BOOL)canResizeColumns {
@@ -428,6 +441,10 @@ static const CGFloat KVIMinimumColumnWidth = 10;
     mutablePrototypes[firstColumnIndex] = secondColumnPrototype;
     mutablePrototypes[firstColumnIndex + 1] = firstColumnPrototype;
     
+    NSNumber *widthTemp = self.widths[firstColumnIndex];
+    self.widths[firstColumnIndex] = self.widths[firstColumnIndex + 1];
+    self.widths[firstColumnIndex + 1] = widthTemp;
+    
     
     KVIEditableColumnPrototypeView *leftPrototypeView = firstColumnIndex < 1 ? nil : self.prototypes[firstColumnIndex - 1];
     
@@ -453,39 +470,6 @@ static const CGFloat KVIMinimumColumnWidth = 10;
     }
     
     [self layoutIfNeeded];
-}
-
-- (BOOL)canResizeColumn:(KVIEditableColumnPrototypeView *)columnPrototype withScale:(CGFloat)scale {
-    BOOL canResizeColumn = TRUE;
-    
-    NSUInteger columnIndex = [self.prototypes indexOfObject:columnPrototype];
-    
-    if ([self.delegate respondsToSelector:@selector(tablePrototypeView:canResizeColumnAtIndex:)]) {
-        canResizeColumn = [self.delegate tablePrototypeViewCanResizeColumns:self];
-    }
-    
-    if (!canResizeColumn) {
-        return FALSE;
-    }
-    
-    if (scale < 1) {
-        return columnPrototype.widthConstraint.constant > KVIMinimumColumnWidth;
-        
-    } else {
-        CGFloat columnsFreeWidth = 0;
-        
-        for (KVIEditableColumnPrototypeView *columnPrototype in self.prototypes) {
-            CGFloat width = columnPrototype.widthConstraint.constant;
-            columnsFreeWidth += MAX(0, width - KVIMinimumColumnWidth);
-        }
-        
-        CGFloat delta = (scale - 1) * columnPrototype.widthConstraint.constant;
-        
-        return columnsFreeWidth > delta;
-        
-    }
-    
-    return FALSE;
 }
 
 - (BOOL)columnPrototypeCanBeDeleted:(KVIEditableColumnPrototypeView *)columnPrototype {
@@ -525,6 +509,8 @@ static const CGFloat KVIMinimumColumnWidth = 10;
                          withPrototype:nextPrototype];
     
     [mutablePrototypes removeObjectAtIndex:columnPrototypeIndex];
+    
+    [self.widths removeObjectAtIndex:columnPrototypeIndex];
     
     if ([self.delegate respondsToSelector:@selector(tablePrototypeView:removedColumnAtIndex:)]) {
         [self.delegate tablePrototypeView:self removedColumnAtIndex:columnPrototypeIndex];

@@ -12,4 +12,6 @@
 
 @interface KVIEditableTableView (Editing) <KVIEditableTablePrototypeViewDelegate>
 
+- (void)updatePrototypeView;
+
 @end

@@ -38,6 +38,14 @@ static NSInteger KVIEditingPrototypeViewTag = -1;
 }
 
 
+- (void)updatePrototypeView {
+    if (self.columnsIsEditing) {
+        KVIEditableTablePrototypeView *prototypeView = [self viewWithTag:KVIEditingPrototypeViewTag];
+        
+        [prototypeView reloadWithWidths:self.columnWidths];
+    }
+}
+
 #pragma mark - Private
 
 - (void)addEditingPrototypeView {

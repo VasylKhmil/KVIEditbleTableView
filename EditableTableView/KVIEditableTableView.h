@@ -69,4 +69,6 @@ extern CGFloat KVIColumnsDynamicWidth;
 
 - (void)endColumnsEditing;
 
+- (void)addColumnWithWidth:(CGFloat)width;
+
 @end

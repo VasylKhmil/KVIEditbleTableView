@@ -10,6 +10,7 @@
 #import "KVIColumnsCell.h"
 #import <objc/runtime.h>
 #import "UIView+KVIColumns.h"
+#import "KVIEditableTableView+Editing.h"
 
 @interface KVIEditableTableView () <UITableViewDataSource, UITableViewDelegate, KVIColumnsCellDataSource>
 
@@ -92,6 +93,19 @@ CGFloat KVIColumnsDynamicWidth = -1;
     }
 }
 
+#pragma mark - Public
+
+- (void)addColumnWithWidth:(CGFloat)width {
+    if (self.columnsIsEditing) {
+        [self readData];
+        
+        [self updatePrototypeView];
+        
+    } else {
+        [self reloadData];
+    }
+}
+
 #pragma mark - Private
 
 - (UIView *)headerViewWithHeader:(NSString *)header {
@@ -123,7 +137,9 @@ CGFloat KVIColumnsDynamicWidth = -1;
         
         headerView.frame = (CGRect){.origin = CGPointZero, .size = CGSizeMake(CGRectGetWidth(self.bounds), self.headerHeight)};
         
-        self.tableHeaderView = headerView;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.tableHeaderView = headerView;
+        });
     }
 }
 
