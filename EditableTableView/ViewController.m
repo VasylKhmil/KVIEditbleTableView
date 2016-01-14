@@ -93,4 +93,8 @@
     return TRUE;
 }
 
+- (UITableViewCell *)tableView:(KVIEditableTableView *)tableView containerCellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [tableView dequeueReusableCellWithIdentifier:@"CustomCell"];
+}
+
 @end

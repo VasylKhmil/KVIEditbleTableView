@@ -49,6 +49,8 @@
 
 - (BOOL)tableViewShouldShowHeaders:(KVIEditableTableView *)tableView;
 
+- (UITableViewCell *)tableView:(KVIEditableTableView *)tableView containerCellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 

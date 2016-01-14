@@ -7,12 +7,12 @@
 //
 
 #import "KVIEditableTableView.h"
-#import "KVIColumnsCell.h"
 #import <objc/runtime.h>
 #import "UIView+KVIColumns.h"
 #import "KVIEditableTableView+Editing.h"
+#import "KVIEditableTableView+CellBuilding.h"
 
-@interface KVIEditableTableView () <UITableViewDataSource, UITableViewDelegate, KVIColumnsCellDataSource>
+@interface KVIEditableTableView () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSArray *columnWidths;
 
@@ -218,52 +218,18 @@ CGFloat KVIColumnsDynamicWidth = -1;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString* const ColumnsCellReuseIdentifier = @"ColumnsCellReuseIdentifier";
-    
-    KVIColumnsCell *cell = [tableView dequeueReusableCellWithIdentifier:ColumnsCellReuseIdentifier];
-    
-    if (cell == nil) {
-        cell = [[KVIColumnsCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                     reuseIdentifier:ColumnsCellReuseIdentifier];
-        
-        cell.dataSource = self;
-    }
-    
-    cell.indexPath = indexPath;
+    UITableViewCell *cell = [self buildedCellForRowAtIdexPath:indexPath];
     
     return cell;
 }
 
 #pragma mark - UITableViewDelegte
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(KVIColumnsCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [cell reload];
-}
-
 //for some reasons resending messages logic is not working for this delegate method
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.editableDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
         [self.editableDelegate tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
-}
-
-#pragma mark - KVIColumnsCellDataSource
-
-- (NSUInteger)numberOfColumnsInCell:(KVIColumnsCell *)cell {
-    return self.columnWidths.count;
-}
-
-- (CGFloat)columnsCell:(KVIColumnsCell *)cell widthForColumnAtIndex:(NSUInteger)index {
-    return ((NSNumber *)self.columnWidths[index]).floatValue;
-}
-
-- (UIView *)columntsCell:(KVIColumnsCell *)cell viewForColumnAtIndex:(NSUInteger)index {
-    
-    
-    return [self.editableDataSource tableView:self
-                  columnViewForRowAtIndexPath:cell.indexPath
-                                atColumnIndex:index];
-    return nil;
 }
 
 @end
