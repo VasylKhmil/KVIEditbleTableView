@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D1EA2701C47ABD2007D13C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D1EA26E1C47ABD2007D13C7 /* Main.storyboard */; };
+		3D1EA2711C47ABD2007D13C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D1EA26F1C47ABD2007D13C7 /* LaunchScreen.storyboard */; };
 		3D57BA2E1C0C8C4700896ADA /* KVIEditableTableView+Editing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57BA2D1C0C8C4700896ADA /* KVIEditableTableView+Editing.m */; };
 		3D57BA341C0CBEBE00896ADA /* KVIEditableColumnPrototypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57BA331C0CBEBE00896ADA /* KVIEditableColumnPrototypeView.m */; };
 		3D57BA371C0CBF1500896ADA /* KVIEditableTablePrototypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D57BA361C0CBF1500896ADA /* KVIEditableTablePrototypeView.m */; };
@@ -17,15 +19,15 @@
 		3D78116E1C05B8F60063FACD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D78116D1C05B8F60063FACD /* main.m */; };
 		3D7811711C05B8F60063FACD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7811701C05B8F60063FACD /* AppDelegate.m */; };
 		3D7811741C05B8F60063FACD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7811731C05B8F60063FACD /* ViewController.m */; };
-		3D7811771C05B8F60063FACD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D7811751C05B8F60063FACD /* Main.storyboard */; };
 		3D7811791C05B8F60063FACD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D7811781C05B8F60063FACD /* Assets.xcassets */; };
-		3D78117C1C05B8F60063FACD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D78117A1C05B8F60063FACD /* LaunchScreen.storyboard */; };
 		3D7811861C05B9510063FACD /* KVIEditableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7811851C05B9510063FACD /* KVIEditableTableView.m */; };
 		3DB898911C1A2781008C24A8 /* UIView+KVIColumns.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB898901C1A2781008C24A8 /* UIView+KVIColumns.m */; };
 		3DFDA2171C064D070062CCD8 /* KVIColumnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFDA2161C064D070062CCD8 /* KVIColumnsCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D1EA26E1C47ABD2007D13C7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		3D1EA26F1C47ABD2007D13C7 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D57BA2C1C0C8C4700896ADA /* KVIEditableTableView+Editing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KVIEditableTableView+Editing.h"; sourceTree = "<group>"; };
 		3D57BA2D1C0C8C4700896ADA /* KVIEditableTableView+Editing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KVIEditableTableView+Editing.m"; sourceTree = "<group>"; };
 		3D57BA321C0CBEBE00896ADA /* KVIEditableColumnPrototypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVIEditableColumnPrototypeView.h; sourceTree = "<group>"; };
@@ -45,9 +47,7 @@
 		3D7811701C05B8F60063FACD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3D7811721C05B8F60063FACD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		3D7811731C05B8F60063FACD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		3D7811761C05B8F60063FACD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3D7811781C05B8F60063FACD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3D78117B1C05B8F60063FACD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D78117D1C05B8F60063FACD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D7811841C05B9510063FACD /* KVIEditableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVIEditableTableView.h; sourceTree = "<group>"; };
 		3D7811851C05B9510063FACD /* KVIEditableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVIEditableTableView.m; sourceTree = "<group>"; };
@@ -124,9 +124,9 @@
 				3D7811701C05B8F60063FACD /* AppDelegate.m */,
 				3D7811721C05B8F60063FACD /* ViewController.h */,
 				3D7811731C05B8F60063FACD /* ViewController.m */,
-				3D7811751C05B8F60063FACD /* Main.storyboard */,
 				3D7811781C05B8F60063FACD /* Assets.xcassets */,
-				3D78117A1C05B8F60063FACD /* LaunchScreen.storyboard */,
+				3D1EA26E1C47ABD2007D13C7 /* Main.storyboard */,
+				3D1EA26F1C47ABD2007D13C7 /* LaunchScreen.storyboard */,
 				3D78117D1C05B8F60063FACD /* Info.plist */,
 				3D78116C1C05B8F60063FACD /* Supporting Files */,
 			);
@@ -217,10 +217,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D78117C1C05B8F60063FACD /* LaunchScreen.storyboard in Resources */,
+				3D1EA2701C47ABD2007D13C7 /* Main.storyboard in Resources */,
+				3D1EA2711C47ABD2007D13C7 /* LaunchScreen.storyboard in Resources */,
 				3D7811791C05B8F60063FACD /* Assets.xcassets in Resources */,
 				3D57BA3A1C0DC41A00896ADA /* KVIEditableColumnPrototypeView.xib in Resources */,
-				3D7811771C05B8F60063FACD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,25 +247,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		3D7811751C05B8F60063FACD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3D7811761C05B8F60063FACD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3D78117A1C05B8F60063FACD /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3D78117B1C05B8F60063FACD /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3D78117E1C05B8F60063FACD /* Debug */ = {

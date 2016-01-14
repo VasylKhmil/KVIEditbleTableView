@@ -19,7 +19,7 @@
 - (UIView *)tableView:(KVIEditableTableView *)tableView columnViewForRowAtIndexPath:(NSIndexPath *)indexPath atColumnIndex:(NSUInteger)columnIndex;
 
 @optional
-- (NSString *)tableView:(KVIEditableTableView *)tableView headerForColumnAtIndex:(NSUInteger) columnIndex;
+- (NSString *)tableView:(KVIEditableTableView *)tableView headerForColumnAtIndex:(NSUInteger)columnIndex;
 
 - (CGFloat)headerHeightForTableView:(KVIEditableTableView *)tableView;
 

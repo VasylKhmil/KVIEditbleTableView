@@ -67,6 +67,8 @@ CGFloat KVIColumnsDynamicWidth = -1;
     [self updateHeader];
     
     [super reloadData];
+    
+    [self updatePrototypeView];
 }
 
 - (BOOL)respondsToSelector:(SEL)aSelector {
@@ -145,10 +147,6 @@ CGFloat KVIColumnsDynamicWidth = -1;
 
 - (id<NSObject>)responderForSelector:(SEL)aSelector {
     
-    if (aSelector == @selector(tableView:numberOfRowsInSection:)) {
-        
-    }
-    
     struct objc_method_description optionalMethodDescription = protocol_getMethodDescription(@protocol(UITableViewDataSource), aSelector, FALSE, TRUE);
     struct objc_method_description requiredMethodDescription = protocol_getMethodDescription(@protocol(UITableViewDataSource), aSelector, TRUE, TRUE);
     
@@ -159,8 +157,8 @@ CGFloat KVIColumnsDynamicWidth = -1;
         
     } else {
         
-        struct objc_method_description optionalMethodDescription = protocol_getMethodDescription(@protocol(UITableViewDataSource), aSelector, FALSE, TRUE);
-        struct objc_method_description requiredMethodDescription = protocol_getMethodDescription(@protocol(UITableViewDataSource), aSelector, TRUE, TRUE);
+        struct objc_method_description optionalMethodDescription = protocol_getMethodDescription(@protocol(UITableViewDelegate), aSelector, FALSE, TRUE);
+        struct objc_method_description requiredMethodDescription = protocol_getMethodDescription(@protocol(UITableViewDelegate), aSelector, TRUE, TRUE);
         
         if (optionalMethodDescription.name != NULL ||
             requiredMethodDescription.name != NULL) {
@@ -240,6 +238,13 @@ CGFloat KVIColumnsDynamicWidth = -1;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(KVIColumnsCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [cell reload];
+}
+
+//for some reasons resending messages logic is not working for this delegate method
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.editableDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+        [self.editableDelegate tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
 }
 
 #pragma mark - KVIColumnsCellDataSource
